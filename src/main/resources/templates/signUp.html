@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css_2/style-signup.css}">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+</head>
+
+
+<!--CONTENT-->
+<div class="login-form">
+
+    <center><a href="/home"><< Go back home </a></center>
+
+    <!--Title-->
+    <center><h2>Sign Up</h2></center>
+
+    <!--Sign Up form-->
+    <form method="post" th:object="${user}" >
+        <!--User name-->
+        <div class="textbox">
+            <p>Name :</p>
+            <input
+                    type="text"
+                    placeholder="Enter name"
+                    th:field="*{name}"
+            >
+        </div>
+        <div style="height: 15px">
+            <p th:each="error : ${#fields.errors('name')}" th:text="${error}"></p>
+        </div>
+
+
+
+        <!--Password-->
+        <div class="textbox">
+            <p>Password</p>
+            <input type="password"
+                   placeholder="Passwords must be at least 6 characters,up to 12 characters."
+                   pattern="[a-z0-9_-]{6,12}$"
+                   title="Passwords must be at least 6 characters,up to 12 characters."
+                   th:field="*{password}" >
+        </div>
+        <div style="height: 15px">
+            <p th:each="error : ${#fields.errors('password')}" th:text="${error}"></p>
+        </div>
+
+        <div style="height: 15px">
+            <th:block th:if="${message}"><p th:text="${message}" style="color: red; text-align: center"></p></th:block>
+        </div>
+
+        <div style="height: 15px">
+            <th:block th:if="${message1}"><p th:text="${message1}" style="color: green; text-align: center"></p></th:block>
+        </div>
+
+
+
+<!--        <div style="height: 15px">-->
+<!--            <th:block th:if="${message}"><p th:text="${message}" style="color: green; text-align: center"></p></th:block>-->
+<!--        </div>-->
+
+        <input type="submit" value="Sign Up" class="signUp-btn">
+
+
+    </form>
+</div>
+<!--<script th:src="@{/javascript/log-in-button.js}"></script>-->
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <head th:replace="layout :: head">
+<!--    <title>Title</title>-->
+</head>
+<body>
+<h1 style="color: orangered">Product List</h1>
+<h4><a href="/product/create">Create new product</a></h4>
+
+<!--<form th:action="@{'/students/search'}" th:method="post">-->
+
+<!--    <select th:name="category" th:id="category">-->
+<!--        <th:block th:each="category:${categories}">-->
+<!--            <option th:value="${category.categoryId}" th:text="${category.name}"></option>-->
+<!--        </th:block>-->
+<!--    </select>-->
+<!--    &lt;!&ndash;    <input type="text" name="className">&ndash;&gt;-->
+<!--    <input type="submit" value="search">-->
+
+<!--</form>-->
+
+<form>
+    <div>
+    <input name="s" type="text" placeholder="Search by name" style="width: 40%"/>
+    <input type="submit" value="Search" style="background-color: #0000FF"/>
+    </div>
+</form>
+<table>
+    <tr th:border="1" id="products">
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Summary Description</th>
+        <th>Price ($)</th>
+        <th>Quantity</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="product: ${products}">
+        <tr>
+            <td th:text="${product.productId}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td><img th:src="@{'/i/'+${product.img}}" width="100"/></td>
+            <td th:text="${product.category.name}"></td>
+<!--            <td><a th:href="@{'/product/edit/'+${product.productId}}">Edit</a></td>-->
+            <td><a th:href="@{/product/edit-product/__${product.productId}__}">Edit</a></td>
+            <td><a th:href="@{/product/delete-product/__${product.productId}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+<hr/>
+<div style="text-align: center;color: saddlebrown">
+    <a th:href="@{'/product/list'(page=${products.number})}" th:if="${products.hasPrevious()}">Previous</a>
+    <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+    <a th:href="@{'/product/list'(page=${products.number + 2})}" th:if="${products.hasNext()}">Next</a>
+</div>
+</body>
+</html>

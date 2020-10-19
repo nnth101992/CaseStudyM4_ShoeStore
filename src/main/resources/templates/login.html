@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" th:href="@{/css_2/style-login.css}">
+
+
+    <link rel="stylesheet" th:href="@{/css_2/style-login.css}">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+</head>
+
+
+
+<div class="login-form">
+
+    <center><a href="/home"><< Go back home </a></center>
+
+
+
+    <center><h2>Sign In</h2></center>
+
+
+    <form class="form clearfix" method="post" th:action="@{/authenticateTheUser}">
+
+        <div class="textbox">
+            <input type="text" placeholder="Username" name="name">
+            <span class="check-message hidden">Required</span>
+        </div>
+
+
+        <div class="textbox">
+            <input type="password" name="password" placeholder="Password" id="password">
+            <span class="check-message hidden">Required</span>
+        </div>
+
+        <div style="height: 20px">
+            <p style="color: red; text-align: center" th:if="${param.error!=null}">Wrong username or password</p>
+        </div>
+
+        <div class="options">
+
+        </div>
+
+
+        <input type="submit" value="Log In Now" class="signIn-btn" disabled>
+
+    </form>
+
+    <div class="dont-have-account">Don't have an account ?<a href="/home/create">  Sign Up</a></div>
+</div>
+
+<script th:src="@{/javascript/log-in-button.js}"></script>
+</body>
+</html>

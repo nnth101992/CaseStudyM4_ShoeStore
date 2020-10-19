@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+<!--    <title>Create</title>-->
+</head>
+<body>
+
+<h1>Create new product</h1>
+<p>
+<h4><a href="/product/list">--> Product List</a></h4>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}" style="color:green;"></p>
+</th:block>
+
+<form th:object="${product}" method="post" enctype="multipart/form-data">
+    <table id="products">
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            <td><input type="file" th:field="*{imgFile}"/></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="text" th:field="*{price}"/></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input type="text" th:field="*{quantity}"/></td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td style="width: auto">
+                <select th:field="*{category}">
+                    <option th:each="c : ${categories}" th:value="${c.categoryId}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create"/></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

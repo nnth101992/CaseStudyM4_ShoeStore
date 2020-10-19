@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css_2/style-signup.css}">
+    <title>Edit</title>
+    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+</head>
+<div class="login-form">
+    <center><a href="/home"><< Go back</a></center>
+    
+    <h2 style="text-align: center">Edit</h2>
+
+    <form method="post" th:object="${user}">
+        <div class="textbox">
+            <p>Username :</p>
+            <input type="text"
+                    placeholder="Enter name"
+                    th:field="*{name}" readonly>
+            <input th:type="hidden" name="id" th:field="*{userId}">
+        </div>
+
+        <br/>
+        <div class="textbox">
+            <p>Input new password :</p>
+            <input type="password"
+                   placeholder="Passwords must be at least 6 characters,up to 12 characters."
+                   th:field="*{password}" >
+        </div>
+        <div style="height: 20px">
+            <p th:each="error : ${#fields.errors('password')}" th:text="${error}"></p>
+        </div>
+
+        <div style="color: green; text-align: center">
+            <th:block th:if="${message}"><p th:text="${message}"></p></th:block>
+        </div>
+
+        <input type="submit" value="Save" class="signUp-btn" disabled>
+
+    </form>
+</div>
+<script th:src="@{/javascript/log-in-button.js}"></script>
+</body>
+</html>

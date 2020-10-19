@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+<!--    <title>Edit product</title>-->
+</head>
+<body>
+<h1>Edit product</h1>
+<h4>
+    <a href="/product/list">Product list</a>
+</h4>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/product/edit-product}" th:object="${product}" enctype="multipart/form-data" method="post">
+    <input th:type="hidden" name="id" th:field="*{productId}">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+
+        <tr>
+            <td>Description</td>
+            <td><input type="text" th:field="*{description}"></td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td><input type="text" th:field="*{price}"></td>
+        </tr>
+
+        <tr>
+            <td>Quantity</td>
+            <td><input type="text" th:field="*{quantity}"></td>
+        </tr>
+
+        <tr>
+            <td>Current image</td>
+            <td><img th:src="@{'/i/'+${product.img}}" width="150" height="100"/></td>
+            <input th:type="hidden" name="image" th:field="*{img}">
+        </tr><br>
+
+
+        <tr>
+            <td>Image</td>
+            <td><input type="file" th:field="*{imgFile}"></td>
+        </tr><br>
+
+        <tr>
+            <td>Category:</td>
+            <td>
+                <select name="category">
+                    <option th:each="c : ${categories}"
+                            th:value="${c.categoryId}"
+                            th:text="${c.name}"
+                            th:selected="(${c.categoryId} == *{category.categoryId})">
+
+                    </option>
+                </select>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h1>UserList</h1>
+<form>
+    Search by username:
+    <input name="search" type="text" width="100px"/>
+    <input type="submit" value="Search"/>
+</form><br/>
+
+<table border="2">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Role of Account</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="user : ${users}" th:if="${user.role.id == 2}" >
+        <tr>
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.role.name}"></td>
+            <td><a th:href="@{/home/listUser/delete/__${user.userId}__}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
+
